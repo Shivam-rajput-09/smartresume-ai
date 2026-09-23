@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Analysis Dashboard — SmartResume AI{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <!-- Header Banner -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <div>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill fw-semibold mb-2">
+                        <i class="bi bi-person-check-fill me-1"></i> Candidate Profile Analysis
+                    </span>
+                    <h2 class="fw-bold text-dark mb-1" id="candidate-name">{{ scan.candidate_name or "Candidate" }}</h2>
+                    <p class="text-muted small mb-0">
+                        <i class="bi bi-file-earmark-text me-1"></i> File: <strong>{{ scan.filename }}</strong> | 
+                        <i class="bi bi-envelope ms-2 me-1"></i> {{ scan.email or "Email Not Detected" }} | 
+                        <i class="bi bi-telephone ms-2 me-1"></i> {{ scan.phone or "Phone Not Detected" }}
+                    </p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('main.recommendations', scan_id=scan.id) }}" class="btn btn-primary px-4 fw-bold shadow-sm" id="btn-view-recs">
+                        <i class="bi bi-briefcase-fill me-2"></i> View Job Recommendations
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left Column: Overall Resume Score & Breakdown -->
+    <div class="col-lg-5">
+        <!-- 100-Point Score Card -->
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4 mb-4 text-center">
+            <h5 class="fw-bold text-secondary mb-3">Overall Resume Quality Score</h5>
+            
+            <div class="score-circle bg-{{ scan.score_breakdown.badge_color or 'primary' }}-subtle text-{{ scan.score_breakdown.badge_color or 'primary' }} border border-{{ scan.score_breakdown.badge_color or 'primary' }}-subtle mb-3">
+                <span class="display-4 fw-bold" id="resume-score-value">{{ scan.resume_score }}</span>
+                <small class="text-muted fw-bold">/ 100 PTS</small>
+            </div>
+            
+            <h4 class="fw-bold mb-1">
+                Grade: <span class="badge bg-{{ scan.score_breakdown.badge_color or 'primary' }} px-3" id="resume-grade">{{ scan.score_grade }}</span>
+            </h4>
+            <p class="text-muted small mb-3 fw-semibold">{{ scan.score_rating }}</p>
+
+            <hr class="my-3">
+
+            <!-- ML Predicted Primary Role Preview -->
+            <div class="p-3 bg-light rounded-3 text-start border">
+                <small class="text-muted fw-bold d-block mb-1"><i class="bi bi-cpu text-primary me-1"></i> ML PRIMARY MATCH (Classifier)</small>
+                <h6 class="fw-bold text-primary mb-1">{{ scan.ml_predicted_role }}</h6>
+                <div class="progress" style="height: 6px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ scan.ml_confidence }}%"></div>
+                </div>
+                <div class="text-end small text-muted mt-1">{{ scan.ml_confidence }}% Model Confidence</div>
+            </div>
+        </div>
+
+        <!-- 5-Pillar Score Breakdown -->
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-bar-chart-steps text-primary me-2"></i> 5-Pillar Scoring Breakdown</h5>
+            
+            {% set b = scan.score_breakdown %}
+            {% if b %}
+            <!-- Pillar 1: Skills -->
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>1. Skills & Diversity</span>
+                    <span class="text-primary">{{ b.skills.score }} / 30 pts</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-primary" style="width: {{ (b.skills.score / 30) * 100 }}%"></div>
+                </div>
+                <small class="text-muted">{{ b.skills.remarks }}</small>
+            </div>
+
+            <!-- Pillar 2: Education -->
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>2. Education Qualifications</span>
+                    <span class="text-success">{{ b.education.score }} / 20 pts</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-success" style="width: {{ (b.education.score / 20) * 100 }}%"></div>
+                </div>
+                <small class="text-muted">{{ b.education.remarks }}</small>
+            </div>
+
+            <!-- Pillar 3: Experience -->
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>3. Work & Internships</span>
+                    <span class="text-info">{{ b.experience.score }} / 20 pts</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-info" style="width: {{ (b.experience.score / 20) * 100 }}%"></div>
+                </div>
+                <small class="text-muted">{{ b.experience.remarks }}</small>
+            </div>
+
+            <!-- Pillar 4: Projects -->
+            <div class="mb-3">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>4. Projects & Action Verbs</span>
+                    <span class="text-warning">{{ b.projects.score }} / 15 pts</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-warning" style="width: {{ (b.projects.score / 15) * 100 }}%"></div>
+                </div>
+                <small class="text-muted">{{ b.projects.remarks }}</small>
+            </div>
+
+            <!-- Pillar 5: Completeness -->
+            <div class="mb-2">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>5. Completeness & Links</span>
+                    <span class="text-dark">{{ b.completeness.score }} / 15 pts</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-dark" style="width: {{ (b.completeness.score / 15) * 100 }}%"></div>
+                </div>
+                <small class="text-muted">{{ b.completeness.remarks }}</small>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Right Column: Extracted Entities, Skills by Domain & Suggestions -->
+    <div class="col-lg-7">
+        <!-- Extracted Skills by Domain -->
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-dark mb-0">
+                    <i class="bi bi-tags-fill text-primary me-2"></i> Identified Skills ({{ scan.skills_count }})
+                </h5>
+            </div>
+            
+            {% if scan.skills_by_category %}
+                {% for category, skills in scan.skills_by_category.items() %}
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-secondary small text-uppercase mb-2">{{ category }} ({{ skills|length }})</h6>
+                        <div>
+                            {% for skill in skills %}
+                                <span class="badge-skill">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted small mb-0">No categorized skills detected. Consider expanding your technical skills section.</p>
+            {% endif %}
+        </div>
+
+        <!-- Detected Education & Experience Card -->
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4 mb-4">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-mortarboard-fill text-success me-2"></i> Academic & Professional Details</h5>
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <div class="p-3 bg-light rounded-3 border h-100">
+                        <small class="text-muted fw-bold d-block mb-1">EDUCATION DEGREES</small>
+                        <p class="mb-0 fw-semibold text-dark">
+                            {% if scan.education %}
+                                {{ scan.education|join(', ') }}
+                            {% else %}
+                                <span class="text-muted">Not Explicitly Stated</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="p-3 bg-light rounded-3 border h-100">
+                        <small class="text-muted fw-bold d-block mb-1">TOTAL EXPERIENCE</small>
+                        <p class="mb-0 fw-semibold text-dark">
+                            {{ scan.experience_years }} Years <span class="text-muted small">({{ "Fresher" if scan.experience_years == 0 else "Experienced" }})</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actionable Improvement Suggestions -->
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4">
+            <h5 class="fw-bold text-dark mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i> Actionable Improvement Suggestions</h5>
+            <ul class="list-group list-group-flush">
+                {% if scan.suggestions %}
+                    {% for tip in scan.suggestions %}
+                        <li class="list-group-item px-0 py-2 border-0 d-flex align-items-start gap-2">
+                            <i class="bi bi-arrow-right-circle-fill text-primary mt-1"></i>
+                            <span class="text-secondary small">{{ tip }}</span>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="list-group-item px-0 border-0 text-success small">
+                        <i class="bi bi-check-circle-fill me-1"></i> Your resume is well-structured and adheres to industry screening standards!
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

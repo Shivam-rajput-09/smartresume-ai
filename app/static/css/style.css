@@ -1,0 +1,85 @@
+/* SmartResume AI — Modern Custom Stylesheet */
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #475569;
+    --bg-surface: #f8fafc;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background-color: var(--bg-surface);
+}
+
+.navbar-brand span {
+    letter-spacing: -0.5px;
+}
+
+.card {
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow) !important;
+}
+
+.badge-skill {
+    background-color: #e0e7ff;
+    color: #3730a3;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 3px;
+    border: 1px solid #c7d2fe;
+}
+
+.badge-missing {
+    background-color: #fee2e2;
+    color: #991b1b;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 3px;
+    border: 1px solid #fecaca;
+}
+
+.score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.timeline-step {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 20px;
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.timeline-step::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 3px solid #fff;
+}

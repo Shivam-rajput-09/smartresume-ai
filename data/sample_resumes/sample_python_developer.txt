@@ -1,0 +1,37 @@
+AARAV SHARMA
+Email: aarav.sharma@example.com | Phone: +91 98765 43210 | Location: Bengaluru, India
+LinkedIn: linkedin.com/in/aaravsharma | GitHub: github.com/aaravsharma
+
+PROFESSIONAL SUMMARY
+Motivated and detail-oriented Junior Python Developer with 1.5 years of experience in developing RESTful APIs, web applications, and backend services. Proficient in Python, Django, Flask, PostgreSQL, and Git. Passionate about clean code, test-driven development, and scalable cloud solutions.
+
+EDUCATION
+Bachelor of Computer Applications in AI (BCA-AI)
+ABC University, Bengaluru (2021 - 2024) | CGPA: 8.7/10
+
+TECHNICAL SKILLS
+- Programming Languages: Python, JavaScript, SQL, C++
+- Frameworks & Libraries: Django, Flask, FastAPI, Pandas, NumPy
+- Databases: PostgreSQL, MySQL, SQLite, Redis
+- Tools & Cloud: Git, GitHub, Docker, Postman, Linux, AWS (EC2, S3)
+- Testing & Methodologies: Pytest, Unit Testing, Agile, Scrum
+
+WORK EXPERIENCE
+Junior Software Developer | TechNova Solutions Pvt Ltd (July 2024 - Present)
+- Developed and maintained 12+ RESTful API endpoints using Django REST Framework and PostgreSQL.
+- Optimized SQL database queries, improving endpoint response time by 28%.
+- Integrated Redis caching layer to handle high-concurrency requests during peak hours.
+- Collaborated in a 6-member Agile team using Git and Jira for sprint management.
+
+PROJECTS
+1. Smart E-Commerce Backend API (Python, Flask, PostgreSQL, Docker)
+- Built a modular REST API with JWT authentication, cart management, and Stripe payment gateway.
+- Containerized the application using Docker and deployed on AWS EC2.
+
+2. Automated Web Scraper & Price Tracker (Python, BeautifulSoup, SQLite)
+- Designed an automated scraping pipeline tracking product prices across 4 major e-commerce platforms.
+- Scheduled daily cron jobs and sent email notifications with price drop alerts.
+
+CERTIFICATIONS
+- Python for Everybody Specialization — Coursera
+- Certified Entry-Level Python Programmer (PCEP)

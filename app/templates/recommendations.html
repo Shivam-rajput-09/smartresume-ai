@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Top Job Recommendations — SmartResume AI{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <!-- Header -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm bg-white p-4 rounded-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <div>
+                    <a href="{{ url_for('main.dashboard', scan_id=scan.id) }}" class="text-decoration-none small text-muted mb-2 d-inline-block">
+                        <i class="bi bi-arrow-left"></i> Back to Resume Dashboard
+                    </a>
+                    <h2 class="fw-bold text-dark mb-1">Top Job Role Recommendations</h2>
+                    <p class="text-secondary small mb-0">
+                        Based on Hybrid Evaluation: <strong>Direct Skill Overlap (65%)</strong> + <strong>TF-IDF Cosine Similarity (35%)</strong> + <strong>Supervised Machine Learning</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Machine Learning Classifier Model Card -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 p-4 text-white" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-3 mb-lg-0">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="p-3 bg-white text-primary rounded-circle shadow-sm">
+                            <i class="bi bi-cpu-fill fs-2"></i>
+                        </div>
+                        <div>
+                            <small class="text-light opacity-75 fw-semibold">SUPERVISED ML CLASSIFIER RECOMMENDATION</small>
+                            <h3 class="fw-bold mb-0 text-white" id="ml-predicted-role">{{ ml_data.predicted_role }}</h3>
+                            <span class="badge bg-white text-primary fw-bold mt-1">Algorithm: {{ ml_data.model_used }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h6 class="small text-light fw-bold mb-2">Multi-Class Probability Distribution:</h6>
+                    {% for p in ml_data.top_predictions[:3] %}
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between small text-light mb-1">
+                                <span>{{ p.role_name }}</span>
+                                <span class="fw-bold">{{ p.confidence_percentage }}%</span>
+                            </div>
+                            <div class="progress bg-white bg-opacity-25" style="height: 6px;">
+                                <div class="progress-bar bg-white" style="width: {{ p.confidence_percentage }}%"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top 5 Recommended Job Roles -->
+    <div class="col-12">
+        <h4 class="fw-bold text-dark mb-3"><i class="bi bi-trophy-fill text-warning me-2"></i> Top 5 Matched Job Profiles</h4>
+        
+        <div class="row g-4">
+            {% for r in recommendations %}
+            <div class="col-12">
+                <div class="card border-0 shadow-sm bg-white p-4 rounded-4 card-hover">
+                    <div class="row align-items-center g-3">
+                        <!-- Rank & Title -->
+                        <div class="col-lg-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="badge bg-primary fs-5 px-3 py-2 rounded-3 shadow-sm" id="role-rank-{{ r.role_id }}">
+                                    #{{ r.rank }}
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold text-dark mb-1" id="role-name-{{ r.role_id }}">{{ r.role_name }}</h4>
+                                    <span class="badge bg-secondary-subtle text-secondary border px-2 py-1 rounded-pill small">
+                                        {{ r.category }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Match Metrics -->
+                        <div class="col-lg-4">
+                            <div class="d-flex justify-content-between align-items-baseline mb-1">
+                                <span class="small fw-bold text-secondary">Match Suitability</span>
+                                <span class="fw-bold text-primary fs-5" id="match-pct-{{ r.role_id }}">{{ r.match_percentage }}%</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 10px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ r.match_percentage }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>Skill Overlap: <strong>{{ r.skill_overlap_percentage }}%</strong></span>
+                                <span>TF-IDF Sim: <strong>{{ r.tfidf_similarity_percentage }}%</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="col-lg-4 text-lg-end">
+                            <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+                                <a href="{{ url_for('main.skill_gap', scan_id=scan.id, role_identifier=r.role_id) }}" class="btn btn-outline-primary btn-sm px-3 fw-semibold" id="btn-gap-{{ r.role_id }}">
+                                    <i class="bi bi-pie-chart-fill me-1"></i> Skill Gap
+                                </a>
+                                <a href="{{ url_for('main.roadmap', scan_id=scan.id, role_identifier=r.role_id) }}" class="btn btn-primary btn-sm px-3 fw-semibold shadow-sm" id="btn-roadmap-{{ r.role_id }}">
+                                    <i class="bi bi-signpost-2-fill me-1"></i> Learning Roadmap
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Skills Breakdown Sub-section -->
+                        <div class="col-12 pt-2 border-top">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <small class="text-success fw-bold d-block mb-1">
+                                        <i class="bi bi-check-circle-fill me-1"></i> Matched Skills ({{ r.matched_skills|length }})
+                                    </small>
+                                    <div>
+                                        {% for s in r.matched_skills %}
+                                            <span class="badge-skill">{{ s }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class="text-danger fw-bold d-block mb-1">
+                                        <i class="bi bi-x-circle-fill me-1"></i> Missing Mandatory Skills ({{ r.missing_skills|length }})
+                                    </small>
+                                    <div>
+                                        {% if r.missing_skills %}
+                                            {% for s in r.missing_skills %}
+                                                <span class="badge-missing">{{ s }}</span>
+                                            {% endfor %}
+                                        {% else %}
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small fw-bold">100% Mandatory Skills Met!</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

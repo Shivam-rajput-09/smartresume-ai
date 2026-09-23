@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}SmartResume AI — AI-Powered Resume Analyzer & Job Recommendation System{% endblock %}
+
+{% block content %}
+<div class="row align-items-center py-5">
+    <div class="col-lg-7">
+        <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+            <i class="bi bi-stars"></i> BCAAI Semester V Minor Project
+        </div>
+        <h1 class="display-4 fw-bold text-dark mb-3">
+            AI-Powered Resume Analysis & Job Recommendations
+        </h1>
+        <p class="lead text-secondary mb-4">
+            Upload your resume to extract key skills using NLP, calculate an explainable 100-point resume quality score, discover Top-5 matched job roles using TF-IDF and Machine Learning, and get a tailored step-by-step learning roadmap.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+            <a href="{{ url_for('main.upload') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
+                <i class="bi bi-cloud-arrow-up-fill me-2"></i> Upload & Analyze Resume
+            </a>
+            <a href="{{ url_for('main.history') }}" class="btn btn-outline-secondary btn-lg px-4">
+                <i class="bi bi-clock-history me-2"></i> View Scan History
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-5 text-center mt-5 mt-lg-0">
+        <div class="card border-0 shadow-lg rounded-4 p-4 bg-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-around text-center mb-4">
+                    <div>
+                        <h2 class="fw-bold text-primary mb-0">{{ total_roles }}</h2>
+                        <small class="text-muted fw-semibold">Job Profiles</small>
+                    </div>
+                    <div class="vr"></div>
+                    <div>
+                        <h2 class="fw-bold text-success mb-0">{{ total_skills }}+</h2>
+                        <small class="text-muted fw-semibold">Taxonomy Skills</small>
+                    </div>
+                    <div class="vr"></div>
+                    <div>
+                        <h2 class="fw-bold text-info mb-0">5</h2>
+                        <small class="text-muted fw-semibold">ML Classifiers</small>
+                    </div>
+                </div>
+                <div class="p-3 bg-light rounded-3 text-start border">
+                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-cpu text-primary me-2"></i> AI & NLP Pipeline Architecture</h6>
+                    <ul class="list-unstyled small text-secondary mb-0">
+                        <li><i class="bi bi-check2 text-success me-1"></i> PDF/TXT Layout Text Extraction</li>
+                        <li><i class="bi bi-check2 text-success me-1"></i> NLTK Tokenization & Lemmatization</li>
+                        <li><i class="bi bi-check2 text-success me-1"></i> Transparent 5-Pillar Resume Scoring</li>
+                        <li><i class="bi bi-check2 text-success me-1"></i> TF-IDF & Supervised ML Matching</li>
+                        <li><i class="bi bi-check2 text-success me-1"></i> Skill-Gap & Custom Capstone Roadmap</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

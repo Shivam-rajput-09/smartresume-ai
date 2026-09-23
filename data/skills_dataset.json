@@ -1,0 +1,72 @@
+{
+  "categories": {
+    "Programming Languages": [
+      "python", "java", "c", "c++", "c#", "javascript", "typescript", "php", 
+      "ruby", "go", "golang", "rust", "kotlin", "swift", "dart", "r", "scala", "shell", "bash"
+    ],
+    "Web Development (Frontend)": [
+      "html", "html5", "css", "css3", "javascript", "typescript", "react", "react.js", 
+      "angular", "vue", "vue.js", "next.js", "bootstrap", "tailwind css", "jquery", 
+      "sass", "redux", "webpack", "responsive design", "rest api"
+    ],
+    "Web Development (Backend)": [
+      "node.js", "express.js", "django", "flask", "fastapi", "spring boot", 
+      "asp.net", "laravel", "ruby on rails", "restful apis", "graphql", "microservices", 
+      "jwt", "oauth", "websockets"
+    ],
+    "Databases & Storage": [
+      "sql", "mysql", "postgresql", "sqlite", "mongodb", "redis", "oracle", 
+      "microsoft sql server", "cassandra", "firebase", "dynamodb", "elasticsearch", "neo4j"
+    ],
+    "Data Science & Machine Learning": [
+      "machine learning", "deep learning", "nlp", "natural language processing", 
+      "computer vision", "data analysis", "data visualization", "pandas", "numpy", 
+      "scipy", "scikit-learn", "sklearn", "tensorflow", "keras", "pytorch", 
+      "opencv", "matplotlib", "seaborn", "tableau", "power bi", "excel", "big data", "hadoop", "spark"
+    ],
+    "DevOps & Cloud": [
+      "git", "github", "gitlab", "docker", "kubernetes", "aws", "azure", "gcp", 
+      "ci/cd", "jenkins", "terraform", "ansible", "linux", "nginx", "apache"
+    ],
+    "Software Engineering & QA": [
+      "data structures", "algorithms", "oop", "object-oriented programming", 
+      "system design", "unit testing", "pytest", "junit", "selenium", "postman", 
+      "cypress", "manual testing", "automation testing", "test-driven development", "tdd", 
+      "agile", "scrum", "jira"
+    ],
+    "Cybersecurity & Networking": [
+      "network security", "cryptography", "penetration testing", "ethical hacking", 
+      "firewalls", "siem", "wireshark", "owasp", "linux security"
+    ],
+    "Soft Skills & Management": [
+      "problem solving", "communication", "teamwork", "leadership", 
+      "critical thinking", "time management", "adaptability", "project management"
+    ]
+  },
+  "skill_aliases": {
+    "js": "javascript",
+    "ts": "typescript",
+    "py": "python",
+    "reactjs": "react",
+    "react.js": "react",
+    "nodejs": "node.js",
+    "express": "express.js",
+    "vuejs": "vue",
+    "vue.js": "vue",
+    "nextjs": "next.js",
+    "sklearn": "scikit-learn",
+    "tf": "tensorflow",
+    "postgres": "postgresql",
+    "mongo": "mongodb",
+    "ml": "machine learning",
+    "dl": "deep learning",
+    "nlp": "natural language processing",
+    "cv": "computer vision",
+    "dsa": "data structures",
+    "ds": "data science",
+    "rest": "rest api",
+    "restful api": "restful apis",
+    "k8s": "kubernetes",
+    "gcp": "google cloud platform"
+  }
+}

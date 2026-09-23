@@ -1,0 +1,34 @@
+PRIYA NAIR
+Email: priya.nair@example.com | Phone: +91 91234 56789 | Location: Pune, India
+LinkedIn: linkedin.com/in/priyanair | Portfolio: priyanair.dev
+
+PROFESSIONAL SUMMARY
+Aspiring Data Scientist and ML Enthusiast with strong analytical foundations in Python, Scikit-learn, Statistics, and Natural Language Processing. Experienced in exploratory data analysis, predictive modeling, data visualization with Matplotlib and Power BI, and deploying machine learning models.
+
+EDUCATION
+Bachelor of Computer Applications (BCA AI & Data Science)
+Pune University (2021 - 2024) | Percentage: 84.5%
+
+TECHNICAL SKILLS
+- Programming: Python, R, SQL
+- Machine Learning & AI: Scikit-learn, TensorFlow, Natural Language Processing (NLP), Deep Learning, Pandas, NumPy
+- Data Visualization: Power BI, Tableau, Matplotlib, Seaborn
+- Databases: MySQL, MongoDB, SQLite
+- Developer Tools: Git, Jupyter Notebook, VS Code, Google Colab
+
+PROJECTS
+1. Customer Churn Prediction System (Python, Scikit-learn, Pandas, Flask)
+- Built classification models (Random Forest, Logistic Regression, XGBoost) achieving 89% accuracy and 0.86 F1-score.
+- Created an interactive web dashboard using Flask for real-time customer risk scoring.
+
+2. NLP Sentiment Analysis for Product Reviews (Python, NLTK, TF-IDF)
+- Preprocessed 50,000+ customer reviews using tokenization, lemmatization, and stopword removal.
+- Trained Naive Bayes and Support Vector Machine (SVM) models with 91% classification accuracy.
+
+3. Sales Performance Dashboard (Power BI, SQL, Excel)
+- Extracted and transformed sales records from MySQL database using SQL queries.
+- Built interactive KPI dashboards tracking regional revenue trends and quarterly forecasts.
+
+CERTIFICATIONS & ACHEIVEMENTS
+- IBM Data Science Professional Certificate
+- 1st Place in Inter-College AI Hackathon 2023
