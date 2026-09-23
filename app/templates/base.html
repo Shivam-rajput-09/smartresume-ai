@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body class="bg-light d-flex flex-column min-vh-100">
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
@@ -28,10 +30,12 @@
                         <a class="nav-link" href="{{ url_for('main.index') }}"><i class="bi bi-house-door"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.upload') }}"><i class="bi bi-cloud-arrow-up"></i> Analyze Resume</a>
+                        <a class="nav-link" href="{{ url_for('main.upload') }}"><i class="bi bi-cloud-arrow-up"></i>
+                            Analyze Resume</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.history') }}"><i class="bi bi-clock-history"></i> Scan History</a>
+                        <a class="nav-link" href="{{ url_for('main.history') }}"><i class="bi bi-clock-history"></i>
+                            Scan History</a>
                     </li>
                     <li class="nav-item ms-lg-2">
                         <a class="btn btn-primary btn-sm px-3 shadow-sm" href="{{ url_for('main.upload') }}">
@@ -46,15 +50,16 @@
     <!-- Flash Notifications -->
     <div class="container mt-3">
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
-                        <i class="bi {% if category == 'success' %}bi-check-circle-fill{% elif category == 'danger' %}bi-exclamation-triangle-fill{% else %}bi-info-circle-fill{% endif %} me-2"></i>
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+            <i
+                class="bi {% if category == 'success' %}bi-check-circle-fill{% elif category == 'danger' %}bi-exclamation-triangle-fill{% else %}bi-info-circle-fill{% endif %} me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
     </div>
 
@@ -67,7 +72,8 @@
     <footer class="bg-dark text-light py-4 mt-auto border-top border-secondary">
         <div class="container text-center">
             <p class="mb-1 fw-semibold">SmartResume AI — AI-Powered Resume Analyzer & Job Recommendation System</p>
-            <p class="text-muted small mb-0">BCAAI Semester V Minor Project | Powered by Python, Flask, NLTK, Scikit-learn & Selenium</p>
+            <p class="text-muted small mb-0">BCAAI Semester V Minor Project | Powered by Python, Flask, NLTK,
+                Scikit-learn & Selenium</p>
         </div>
     </footer>
 
@@ -76,4 +82,5 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
+
 </html>

@@ -5,14 +5,17 @@
 {% block content %}
 <div class="row align-items-center py-5">
     <div class="col-lg-7">
-        <div class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+        <div
+            class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
             <i class="bi bi-stars"></i> BCAAI Semester V Minor Project
         </div>
         <h1 class="display-4 fw-bold text-dark mb-3">
             AI-Powered Resume Analysis & Job Recommendations
         </h1>
         <p class="lead text-secondary mb-4">
-            Upload your resume to extract key skills using NLP, calculate an explainable 100-point resume quality score, discover Top-5 matched job roles using TF-IDF and Machine Learning, and get a tailored step-by-step learning roadmap.
+            Upload your resume to extract key skills using NLP, calculate an explainable 100-point resume quality score,
+            discover Top-5 matched job roles using TF-IDF and Machine Learning, and get a tailored step-by-step learning
+            roadmap.
         </p>
         <div class="d-flex flex-wrap gap-3">
             <a href="{{ url_for('main.upload') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
@@ -43,7 +46,8 @@
                     </div>
                 </div>
                 <div class="p-3 bg-light rounded-3 text-start border">
-                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-cpu text-primary me-2"></i> AI & NLP Pipeline Architecture</h6>
+                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-cpu text-primary me-2"></i> AI & NLP Pipeline
+                        Architecture</h6>
                     <ul class="list-unstyled small text-secondary mb-0">
                         <li><i class="bi bi-check2 text-success me-1"></i> PDF/TXT Layout Text Extraction</li>
                         <li><i class="bi bi-check2 text-success me-1"></i> NLTK Tokenization & Lemmatization</li>
